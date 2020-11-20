@@ -1,5 +1,6 @@
 const { Node } = require("flatend");
-const apiHandler = require("./api");
+const api = require("./api");
+var storage = {}
 
 const main = async () => {
   const node = await Node.start({
@@ -10,12 +11,7 @@ const main = async () => {
         ctx.send(today.toISOString())
       },
       api: async (ctx) => {
-        // CRUD routes
-        // Create: POST /api/<namespace>/
-        // Read: GET /api/<namespace>/
-        // Update: POST /api/<namespace>/update
-        // Delete: POST /api/<namespace>/delete
-        return apiHandler(ctx)
+        return api.handler(ctx, storage)
       }
     }
   })
