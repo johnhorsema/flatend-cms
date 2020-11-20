@@ -1,0 +1,25 @@
+addr = "127.0.0.1:9000"
+
+[[http]]
+addr = ":3000"
+
+[http.max]
+header_size = 1048576 # Max HTTP request header size in bytes.
+body_size = 1048576 # Max HTTP request body size in bytes.
+
+[[http.routes]]
+path = "GET /"
+static = "../dist"
+service = "dist"
+
+[[http.routes]]
+path = "GET /index"
+service = "index"
+
+[[http.routes]]
+path = "POST /api/:namespace/:action"
+service = "api"
+
+[[http.routes]]
+path = "GET /api/:namespace"
+service = "api"
